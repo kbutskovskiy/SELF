@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import math
 from matplotlib import pyplot as plt
 from matplotlib.figure import Figure
 import mpld3
+from .models import Value
+from .forms import ValueForm
+
 
 def voltage(array, a, c, tim):
     t = 0
@@ -26,7 +29,20 @@ fig = Figure(figsize=(10,10))
 plt.savefig('bank_data.png')
 
 def index(request):
-    return render(request, 'main/index.html')
+    error = ''
+    if request.method == 'POST':
+        form = ValueForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            error = 'неверная форма'
+    form = ValueForm()
+    data = {
+        'form': form,
+        'error': error
+    }
+    return render(request, 'main/index.html', data)
 
 html_str = mpld3.fig_to_html(fig)
 Html_file = open("index.html","w")

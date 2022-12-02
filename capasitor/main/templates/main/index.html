@@ -9,8 +9,16 @@
 </head>
 <body>
     <h1>{{ plot }}</h1>
-    <img src="bank_data.png"
-    <p>Здесь вы можете в общем сделать лабу с конденсаторами</p>
-    <p>Никита Рябов тут</p>
+    <img src="bank_data.png">
+    <br><br>
+    <h1>Введите данные в форму</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.capacity }}<br>
+        {{ form.amplitude }}<br>
+        {{ form.frequency }}<br>
+        <span>{{ error }}</span>
+        <button type="submit" class="btn btn-success">Добавить</button>
+    </form>
 </body>
 </html>
