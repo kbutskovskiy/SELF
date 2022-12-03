@@ -62,11 +62,3 @@ def index(request):
         'error': error
     }
     return render(request, 'main/index.html', data)
-
-
-# html_str = mpld3.fig_to_html(fig)
-# Html_file = open("index.html","w")
-# Html_file.write(html_str)
-# Html_file.close()
-def about(request):
-    return render(request, 'main/about.html')
