@@ -3,8 +3,6 @@ from django.http import HttpResponse
 import math
 from matplotlib import pyplot as plt
 from matplotlib.figure import Figure
-import mpld3
-from .models import Value
 from .forms import ValueForm
 
 

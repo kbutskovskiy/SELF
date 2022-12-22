@@ -1,4 +1,68 @@
 #capacitor{
     padding-left: 200px;
 }
+.field_style{
+    width: 800px;
+    margin-left: 35px;
+}
+.header {
+    background-color: darkblue;
+    color: white;
+    display: inline-flex;
+}
+.header-style {
+    font-size: 30px;
+    padding-top: 0px;
+}
+.self-style{
+    font-size: 45px;
+    padding-left: 1300px;
+}
+#footer-site{
+  padding-bottom: 20px;
+  padding-top: 20px;
+  background-color: darkblue;
+  color: white;
+  text-align:center;
+  margin-top: 9px;
+}
+.widget{
+  color: white;
+}
+.table-style{
+    display: inline-block;
+}
+.list li:nth-child(1)::marker {
+  content: "C(Ф) = ";
+}
+.list li:nth-child(2)::marker{
+  content: "U(В) = "
+}
+.list li:nth-child(3)::marker{
+  content: "w(1/с) = "
+}
+.list li:nth-child(4)::marker{
+  content: "R(ОМ) = "
+}
+.list li:nth-child(5)::marker {
+  content: "t(с) = ";
+}
+.widget-social {
+    list-style: none;
+}
+.widget-social li a{
+  padding-right: 22px;
+  text-decoration: none;
+  display: inline-block;
+  margin-right: 5px;
+  color: white;
+  font-size: 30px;
+}
+.widget-social li a:hover{
+  color: blue !important;
+}
+
+
+
+
 
