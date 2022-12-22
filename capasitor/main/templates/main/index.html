@@ -5,29 +5,41 @@
     <title>Главная страница</title>
     <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <link rel = "stylesheet" href = "static/main/css/daimn.css">
+    <script src="https://kit.fontawesome.com/a483c2babf.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<header>
-    <h1 class="header">Лабораторная работа<br>Зарядка и разрядка конденсатора</h1>
-    <nav>
-        <ul>
-            <li>
-                <p id="SELF">СЭЛФ</p>
-            </li>
-        </ul>
-    </nav>
+<header class="header">
+    <p class="header-style">ЗАРЯДКА И РАЗРЯДКА КОНДЕНСАТОРА</p>
+    <p class="self-style">СЭЛФ</p>
 </header>
     <img id="capacitor" src="voltageOnCapacitor.png">
     <img src="voltageOnResistor.png">
     <br><br>
     <h1>Введите данные в форму</h1>
-    <form method="post">
+    <form method="post" class = "field_style">
         {% csrf_token %}
-        {{ form.capacity }}<br>
-        {{ form.amplitude }}<br>
-        {{ form.frequency }}<br>
+        <nav>
+            <ul class="list">
+                <li>{{ form.capacity }}</li>
+                <li>{{ form.amplitude }}</li>
+                <li>{{ form.frequency }}</li>
+                <li>{{ form.resistance }}</li>
+                <li>{{ form.time }}</li>
+            </ul>
+        </nav>
         <span>{{ error }}</span>
         <button type="submit" class="btn btn-success">Добавить</button>
     </form>
+<footer id="footer-site">
+        <ul class="widget-social">
+          <li>
+            <a href="" class="fa-brands fa-vk"></a>
+            <a href="" class="fa-brands fa-telegram"></a>
+        </li>
+      </ul>
+        <div>
+          &copy; 2022
+      </div>
+    </footer>
 </body>
 </html>
