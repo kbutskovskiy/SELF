@@ -45,7 +45,7 @@
   content: "R (Ом) = "
 }
 .list li:nth-child(5)::marker {
-  content: "dt (с) = ";
+  content: "T (с) = ";
 }
 .widget-social {
     list-style: none;
