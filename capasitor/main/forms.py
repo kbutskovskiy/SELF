@@ -26,6 +26,6 @@ class ValueForm(ModelForm):
             }),
             "time": NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Введите время процесса'
+                'placeholder': 'Введите шаг процесса'
             }),
         }
