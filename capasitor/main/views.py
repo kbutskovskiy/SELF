@@ -11,31 +11,36 @@ from .forms import ValueForm
 def impulse(impulseArray, volt, timeArray, workTime, duration):
     t = 0
     while t < workTime:
-    # for t in range(workTime):
-        if (t // duration) % duration == 0:
+        if (t // duration) % 2 == 0:
             impulseArray.append(volt)
             timeArray.append(t)
         else:
             impulseArray.append(0)
             timeArray.append(t)
+        t = t + 0.05
+
+
+def voltage(capacityArray, volt, capacity, timeArray, workTime, resistance, duration):
+    t = 0
+    while t < workTime:
+        if (t // duration) % duration == 0:
+            capacityArray.append(volt * (1 - math.pow(math.e, -t / (resistance * capacity))))
+            timeArray.append(t)
+        else:
+            capacityArray.append(volt * math.pow(math.e, -t / (capacity * resistance)))
+            timeArray.append(t)
         t = t + 0.1
 
 
-def voltage(capacityArray, volt, capacity, timeArray, workTime, resistance):
+def resist(array, volt, workTime, timeArray, resistance, duration):
     t = 0
     while t < workTime:
-    # for t in range(workTime):
-        capacityArray.append(volt * (1 - math.pow(math.e, -t / (resistance * capacity))))
-        timeArray.append(t)
-        t = t + 0.1
-
-
-def resist(array, volt, workTime, timeArray, resistance):
-    t = 0
-    while t < workTime:
-    # for t in range(workTime):
-        array.append(volt * math.pow(math.e, -t / (capacity * resistance)))
-        timeArray.append(t)
+        if (t // duration) % duration == 0:
+            array.append(volt * math.pow(math.e, -t / (capacity * resistance)))
+            timeArray.append(t)
+        else:
+            array.append(volt * (1 - math.pow(math.e, -t / (resistance * capacity))))
+            timeArray.append(t)
         t = t + 0.1
 
 capacity = 0
@@ -64,8 +69,8 @@ def index(request):
         timeArray1 = []
         timeArray2 = []
         timeArray3 = []
-        voltage(capacityArray, volta, capacity, timeArray1, time, resistance)
-        resist(resistArray, volta, time, timeArray2, resistance)
+        voltage(capacityArray, volta, capacity, timeArray1, time, resistance, duration)
+        resist(resistArray, volta, time, timeArray2, resistance, duration)
         impulse(impulseArray, volta, timeArray3, time, duration)
 
         plt.plot(timeArray3, impulseArray)
