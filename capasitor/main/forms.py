@@ -5,7 +5,7 @@ from django.forms import ModelForm, NumberInput
 class ValueForm(ModelForm):
     class Meta:
         model = Value
-        fields = ['capacity', 'amplitude', 'duration', 'resistance', 'time']
+        fields = ['capacity', 'amplitude', 'frequency', 'resistance', 'time']
 
         widgets = {
             "capacity": NumberInput(attrs={
@@ -16,9 +16,9 @@ class ValueForm(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Введите амплитуду'
             }),
-            "duration": NumberInput(attrs={
+            "frequency": NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Введите длительность импульса'
+                'placeholder': 'Введите частоту'
             }),
             "resistance": NumberInput(attrs={
                 'class': 'form-control',
