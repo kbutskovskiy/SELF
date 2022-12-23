@@ -3,7 +3,7 @@
 }
 .field_style{
     width: 800px;
-    margin-left: 35px;
+    margin-left: 50px;
 }
 .header {
     background-color: darkblue;
@@ -33,19 +33,19 @@
     display: inline-block;
 }
 .list li:nth-child(1)::marker {
-  content: "C(Ф) = ";
+  content: "C (Ф) = ";
 }
 .list li:nth-child(2)::marker{
-  content: "U(В) = "
+  content: "U (В) = "
 }
 .list li:nth-child(3)::marker{
-  content: "w(1/с) = "
+  content: "t (с) = "
 }
 .list li:nth-child(4)::marker{
-  content: "R(ОМ) = "
+  content: "R (Ом) = "
 }
 .list li:nth-child(5)::marker {
-  content: "t(с) = ";
+  content: "T (с) = ";
 }
 .widget-social {
     list-style: none;
