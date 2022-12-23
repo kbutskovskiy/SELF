@@ -10,7 +10,8 @@ from .forms import ValueForm
 
 def impulse(impulseArray, volt, timeArray, workTime, duration):
     t = 0
-    for t in range(workTime):
+    while t < workTime:
+    # for t in range(workTime):
         if (t // duration) % duration == 0:
             impulseArray.append(volt)
             timeArray.append(t)
@@ -22,7 +23,8 @@ def impulse(impulseArray, volt, timeArray, workTime, duration):
 
 def voltage(capacityArray, volt, capacity, timeArray, workTime, resistance):
     t = 0
-    for t in range(workTime):
+    while t < workTime:
+    # for t in range(workTime):
         capacityArray.append(volt * (1 - math.pow(math.e, -t / (resistance * capacity))))
         timeArray.append(t)
         t = t + 0.1
@@ -30,7 +32,8 @@ def voltage(capacityArray, volt, capacity, timeArray, workTime, resistance):
 
 def resist(array, volt, workTime, timeArray, resistance):
     t = 0
-    for t in range(workTime):
+    while t < workTime:
+    # for t in range(workTime):
         array.append(volt * math.pow(math.e, -t / (capacity * resistance)))
         timeArray.append(t)
         t = t + 0.1
@@ -50,11 +53,11 @@ def index(request):
         global frequency
         global time
         global volta
-        capacity = int(form['capacity'].value())
-        volta = int(form['amplitude'].value())
-        duration = int(form['duration'].value())
-        resistance = int(form['resistance'].value())
-        time = int(form['time'].value())
+        capacity = float(form['capacity'].value())
+        volta = float(form['amplitude'].value())
+        duration = float(form['duration'].value())
+        resistance = float(form['resistance'].value())
+        time = float(form['time'].value())
         capacityArray = []
         resistArray = []
         impulseArray = []
@@ -69,7 +72,7 @@ def index(request):
         plt.title("Напряжение источника")
         plt.ylabel('Напряжение, В')
         plt.xlabel('Время, с')
-        # plt.grid(True)
+        plt.grid(True)
         fig3 = Figure()
         plt.savefig('Impulse.png')
         plt.close(fig3)
@@ -80,7 +83,7 @@ def index(request):
         plt.title("Напряжение на конденсаторе")
         plt.ylabel('Напряжение, В')
         plt.xlabel('Время, с')
-        # plt.grid(True)
+        plt.grid(True)
         fig1 = Figure(figsize=(10, 10))
         plt.savefig('voltageOnCapacitor.png')
         plt.close(fig1)
@@ -91,7 +94,7 @@ def index(request):
         plt.title("Напряжение на резисторе")
         plt.ylabel('Напряжение, В')
         plt.xlabel('Время, с')
-        # plt.grid(True)
+        plt.grid(True)
         fig2 = Figure(figsize=(10, 10))
         plt.savefig('Resist.png')
         plt.close(fig2)
