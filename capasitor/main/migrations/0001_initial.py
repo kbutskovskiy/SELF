@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('capacity', models.FloatField(verbose_name='Ёмкость')),
                 ('amplitude', models.FloatField(verbose_name='Амплитуда')),
-                ('frequency', models.FloatField(verbose_name='Частота')),
+                ('duration', models.FloatField(verbose_name='Длительность')),
                 ('resistance', models.FloatField(verbose_name='Сопротивление')),
                 ('time', models.FloatField(verbose_name='Время')),
             ],

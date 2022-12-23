@@ -8,7 +8,7 @@ from django.shortcuts import render
 from .forms import ValueForm
 
 
-def voltage(capacityArray, volt, capacity, timeArray, frequency, workTime, resistance):
+def voltage(capacityArray, volt, capacity, timeArray, workTime, resistance):
     t = 0
     for t in range(workTime):
         capacityArray.append(volt * (1 - math.pow(math.e, -t / (resistance * capacity))))
@@ -16,7 +16,7 @@ def voltage(capacityArray, volt, capacity, timeArray, frequency, workTime, resis
         t = t + 0.1
 
 
-def resist(array, volt, frequency, workTime, timeArray, resistance):
+def resist(array, volt, workTime, timeArray, resistance):
     t = 0
     for t in range(workTime):
         array.append(volt * math.pow(math.e, -t / (capacity * resistance)))
@@ -40,15 +40,15 @@ def index(request):
         global volta
         capacity = int(form['capacity'].value())
         resistance = int(form['resistance'].value())
-        frequency = int(form['frequency'].value())
+        duration = int(form['duration'].value())
         time = int(form['time'].value())
         volta = int(form['amplitude'].value())
         capacityArray = []
         resistArray = []
         timeArray1 = []
         timeArray2 = []
-        voltage(capacityArray, volta, capacity, timeArray1, frequency, time, resistance)
-        resist(resistArray, volta, frequency, time, timeArray2, resistance)
+        voltage(capacityArray, volta, capacity, timeArray1, time, resistance)
+        resist(resistArray, volta, time, timeArray2, resistance)
 
         plt.plot(timeArray1, capacityArray)
         plt.title("Напряжение на конденсаторе")
