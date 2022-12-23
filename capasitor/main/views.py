@@ -8,6 +8,18 @@ from django.shortcuts import render
 from .forms import ValueForm
 
 
+def impulse(impulseArray, volt, timeArray, workTime, duration):
+    t = 0
+    for t in range(workTime):
+        if (t // duration) % duration == 0:
+            impulseArray.append(volt)
+            timeArray.append(t)
+        else:
+            impulseArray.append(0)
+            timeArray.append(t)
+        t = t + 0.1
+
+
 def voltage(capacityArray, volt, capacity, timeArray, workTime, resistance):
     t = 0
     for t in range(workTime):
@@ -39,21 +51,36 @@ def index(request):
         global time
         global volta
         capacity = int(form['capacity'].value())
-        resistance = int(form['resistance'].value())
-        duration = int(form['duration'].value())
-        time = int(form['time'].value())
         volta = int(form['amplitude'].value())
+        duration = int(form['duration'].value())
+        resistance = int(form['resistance'].value())
+        time = int(form['time'].value())
         capacityArray = []
         resistArray = []
+        impulseArray = []
         timeArray1 = []
         timeArray2 = []
+        timeArray3 = []
         voltage(capacityArray, volta, capacity, timeArray1, time, resistance)
         resist(resistArray, volta, time, timeArray2, resistance)
+        impulse(impulseArray, volta, timeArray3, time, duration)
+
+        plt.plot(timeArray3, impulseArray)
+        plt.title("Напряжение источника")
+        plt.ylabel('Напряжение, В')
+        plt.xlabel('Время, с')
+        # plt.grid(True)
+        fig3 = Figure()
+        plt.savefig('Impulse.png')
+        plt.close(fig3)
+        plt.cla()
+        plt.clf()
 
         plt.plot(timeArray1, capacityArray)
         plt.title("Напряжение на конденсаторе")
         plt.ylabel('Напряжение, В')
         plt.xlabel('Время, с')
+        # plt.grid(True)
         fig1 = Figure(figsize=(10, 10))
         plt.savefig('voltageOnCapacitor.png')
         plt.close(fig1)
@@ -62,8 +89,9 @@ def index(request):
 
         plt.plot(timeArray2, resistArray)
         plt.title("Напряжение на резисторе")
-        plt.ylabel('Напряжение, с')
+        plt.ylabel('Напряжение, В')
         plt.xlabel('Время, с')
+        # plt.grid(True)
         fig2 = Figure(figsize=(10, 10))
         plt.savefig('Resist.png')
         plt.close(fig2)
