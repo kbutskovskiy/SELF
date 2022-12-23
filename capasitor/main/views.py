@@ -50,23 +50,23 @@ def index(request):
         voltage(capacityArray, volta, capacity, timeArray1, frequency, time)
         resist(resistArray, volta, frequency, time, timeArray2)
         plt.plot(timeArray1, capacityArray)
-        plt.title("На конденсаторе")
+        plt.title("Напряжение на конденсаторе")
         plt.ylabel('Напряжение, В')
         plt.xlabel('Время, с')
         fig1 = Figure(figsize=(10, 10))
         plt.savefig('voltageOnCapacitor.png')
         plt.close(fig1)
+        plt.cla()
+        plt.clf()
         plt.plot(timeArray2, resistArray)
-        plt.title("На резисторе")
+        plt.title("Напряжение на резисторе")
         plt.ylabel('Напряжение, с')
         plt.xlabel('Время, с')
         fig2 = Figure(figsize=(10, 10))
         plt.savefig('Resist.png')
         plt.close(fig2)
-        capacityArray = []
-        timeArray2 = []
-        timeArray1 = []
-        resistArray = []
+        plt.cla()
+        plt.clf()
         if form.is_valid():
             form.save()
             return redirect('home')
