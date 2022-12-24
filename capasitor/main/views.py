@@ -22,32 +22,41 @@ def impulse(impulseArray, volt, timeArray, workTime, duration):
 
 def voltage(capacityArray, volt, capacity, timeArray, workTime, resistance, duration):
     t = 0
+    switchedVoltage = [volt]
     while t < workTime:
-        if (t // duration) % duration == 0:
-            capacityArray.append(volt * (1 - math.pow(math.e, -t / (resistance * capacity))))
+        if (t // duration) % 2 == 0:
+            capacityArray.append(switchedVoltage[-1] * (1 - math.pow(math.e, (-t + duration * len(switchedVoltage) - 1) / (resistance * capacity))))
             timeArray.append(t)
+            if math.fabs(t - duration * len(switchedVoltage)) < 0.001:
+                switchedVoltage.append(switchedVoltage[-1] * (1 - math.pow(math.e, (-t + duration * len(switchedVoltage) - 1) / (resistance * capacity))))
         else:
-            capacityArray.append(volt * math.pow(math.e, -t / (capacity * resistance)))
+            capacityArray.append(switchedVoltage[-1] * math.pow(math.e, (-t + duration * len(switchedVoltage) - 1) / (capacity * resistance)))
             timeArray.append(t)
-        t = t + 0.1
+            if math.fabs(t - duration * len(switchedVoltage)) < 0.001:
+                switchedVoltage.append(switchedVoltage[-1] * math.pow(math.e, (-t + duration * len(switchedVoltage) - 1) / (resistance * capacity)))
+        t = t + 0.01
+    print(len(switchedVoltage))
 
 
 def resist(array, volt, workTime, timeArray, resistance, duration):
     t = 0
+    switchedVoltage = [volt]
     while t < workTime:
-        if (t // duration) % duration == 0:
-            array.append(volt * math.pow(math.e, -t / (capacity * resistance)))
+        if (t // duration) % 2 == 0:
+            array.append(switchedVoltage[-1] * math.pow(math.e, -t / (capacity * resistance)))
             timeArray.append(t)
         else:
-            array.append(volt * (1 - math.pow(math.e, -t / (resistance * capacity))))
+            array.append(-switchedVoltage[-1] * (1 - math.pow(math.e, -t / (resistance * capacity))))
             timeArray.append(t)
-        t = t + 0.1
+        t = t + 0.01
+
 
 capacity = 0
 resistance = 0
 frequency = 0
 time = 0
 volta = 0
+
 
 def index(request):
     error = ''
