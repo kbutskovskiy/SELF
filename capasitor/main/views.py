@@ -8,10 +8,13 @@ from django.shortcuts import render
 from .forms import ValueForm
 
 
+# import pdb; pdb.set_trace()
+
+
 def impulse(impulseArray, volt, timeArray, workTime, duration):
     t = 0
     while t < workTime:
-        if (t // duration) % 2 == 0:
+        if (t // duration) == 0:
             impulseArray.append(volt)
             timeArray.append(t)
         else:
@@ -24,29 +27,28 @@ def voltage(capacityArray, volt, capacity, timeArray, workTime, resistance, dura
     t = 0
     switchedVoltage = [volt]
     while t < workTime:
-        if (t // duration) % 2 == 0:
-            capacityArray.append(switchedVoltage[-1] * (1 - math.pow(math.e, (-t + duration * len(switchedVoltage) - 1) / (resistance * capacity))))
+        if (t // duration) == 0:
+            capacityArray.append(volt * (1 - math.pow(math.e, (-t + duration * (len(switchedVoltage) - 1)) / (resistance * capacity))))
             timeArray.append(t)
-            if math.fabs(t - duration * len(switchedVoltage)) < 0.001:
-                switchedVoltage.append(switchedVoltage[-1] * (1 - math.pow(math.e, (-t + duration * len(switchedVoltage) - 1) / (resistance * capacity))))
+            if math.fabs(duration * len(switchedVoltage) - t) < 0.001:
+                switchedVoltage.append(volt * (1 - math.pow(math.e, (-t + duration * (len(switchedVoltage) - 1)) / (resistance * capacity))))
         else:
-            capacityArray.append(switchedVoltage[-1] * math.pow(math.e, (-t + duration * len(switchedVoltage) - 1) / (capacity * resistance)))
+            capacityArray.append(switchedVoltage[-1] * math.pow(math.e, (-t + duration * (len(switchedVoltage) - 1)) / (capacity * resistance)))
             timeArray.append(t)
-            if math.fabs(t - duration * len(switchedVoltage)) < 0.001:
-                switchedVoltage.append(switchedVoltage[-1] * math.pow(math.e, (-t + duration * len(switchedVoltage) - 1) / (resistance * capacity)))
+            if math.fabs(duration * len(switchedVoltage) - t) < 0.001:
+                switchedVoltage.append(switchedVoltage[-1] * math.pow(math.e, (-t + duration * (len(switchedVoltage) - 1)) / (resistance * capacity)))
         t = t + 0.01
-    print(len(switchedVoltage))
 
 
 def resist(array, volt, workTime, timeArray, resistance, duration):
     t = 0
     switchedVoltage = [volt]
     while t < workTime:
-        if (t // duration) % 2 == 0:
-            array.append(switchedVoltage[-1] * math.pow(math.e, -t / (capacity * resistance)))
+        if (t // duration) == 0:
+            array.append(volt * math.pow(math.e, -t / (capacity * resistance)))
             timeArray.append(t)
         else:
-            array.append(-switchedVoltage[-1] * (1 - math.pow(math.e, -t / (resistance * capacity))))
+            array.append(volt * (1 - math.pow(math.e, -t / (resistance * capacity))))
             timeArray.append(t)
         t = t + 0.01
 
